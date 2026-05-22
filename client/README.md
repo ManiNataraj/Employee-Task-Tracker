@@ -74,7 +74,7 @@ employee-task-tracker/
 ## Clone Repository
 
 ```bash
-git clone 
+git clone https://github.com/ManiNataraj/Employee-Task-Tracker.git
 ```
 
 ---
