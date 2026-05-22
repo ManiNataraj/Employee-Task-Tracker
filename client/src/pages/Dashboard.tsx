@@ -234,24 +234,24 @@ export default function Dashboard() {
                   {tasks.length}
                 </p>
               </div>
-              <div className="bg-white rounded-xl border border-gray-200 p-3 sm:p-4">
-                <p className="text-[10px] sm:text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">
+              <div className="bg-amber-50 rounded-xl border border-amber-200 p-3 sm:p-4">
+                <p className="text-[10px] sm:text-xs font-semibold text-gray-900 uppercase tracking-widest mb-1">
                   Pending
                 </p>
                 <p className="text-2xl sm:text-3xl font-bold text-amber-500">
                   {pendingCount}
                 </p>
               </div>
-              <div className="bg-white rounded-xl border border-gray-200 p-3 sm:p-4">
-                <p className="text-[10px] sm:text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">
+              <div className="bg-emerald-50 rounded-xl border border-emerald-200 p-3 sm:p-4">
+                <p className="text-[10px] sm:text-xs font-semibold text-gray-900 uppercase tracking-widest mb-1">
                   Done
                 </p>
                 <p className="text-2xl sm:text-3xl font-bold text-emerald-500">
                   {completedCount}
                 </p>
               </div>
-              <div className="bg-white rounded-xl border border-gray-200 p-3 sm:p-4">
-                <p className="text-[10px] sm:text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">
+              <div className="bg-rose-50 rounded-xl border border-rose-200 p-3 sm:p-4">
+                <p className="text-[10px] sm:text-xs font-semibold text-gray-900 uppercase tracking-widest mb-1">
                   Overdue
                 </p>
                 <p
