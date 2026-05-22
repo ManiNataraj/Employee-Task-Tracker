@@ -3,7 +3,7 @@ import axios from "axios";
 import type { Task } from "../types/task";
 
 
-const API = import.meta.env.VITE_RENDER_URL;
+const API = import.meta.env.VITE_API_URL;
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
