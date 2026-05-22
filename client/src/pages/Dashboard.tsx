@@ -362,11 +362,14 @@ export default function Dashboard() {
         </div>
 
         {/* ── Filter Bar ── */}
-        <div className="bg-white rounded-xl border border-gray-200 p-3 sm:p-4 mb-4 shadow-sm space-y-3">
+        <div className="bg-gray-200 rounded-xl border border-gray-200 p-3 sm:p-4 mb-4 shadow-sm space-y-3">
+          <p className="text-sm font-semibold text-gray-700 mb-3">
+            Filter Tasks
+          </p>
           {/* Row 1: Status filter + result count */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest hidden sm:inline">
+              <span className="text-[10px] font-semibold text-gray-700 uppercase tracking-widest hidden sm:inline">
                 Status
               </span>
               <div className="flex gap-1 bg-gray-100 p-1 rounded-full">
@@ -392,18 +395,18 @@ export default function Dashboard() {
                 ))}
               </div>
             </div>
-            <span className="text-xs sm:text-sm text-gray-400 pl-1 sm:pl-0">
+            <span className="text-xs sm:text-sm text-gray-500 pl-1 sm:pl-0">
               {filteredTasks.length}{" "}
               {filteredTasks.length === 1 ? "task" : "tasks"}
             </span>
           </div>
 
           {/* Divider */}
-          <div className="border-t border-gray-100" />
+          <div className="border-t border-gray-400" />
 
           {/* Row 2: Priority filter */}
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest">
+            <span className="text-[10px] font-semibold text-gray-700 uppercase tracking-widest">
               Priority
             </span>
             <div className="flex gap-1.5 flex-wrap">
