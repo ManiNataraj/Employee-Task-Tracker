@@ -631,7 +631,7 @@ export default function Dashboard() {
                   )}
 
                   {/* Bottom: badges + due date + actions */}
-                  <div className="flex flex-wrap items-center justify-between gap-2 ml-7">
+                  <div className="flex flex-wrap items-center justify-between gap-3 ml-7">
                     {/* Left: badges */}
                     <div className="flex items-center gap-1.5 flex-wrap">
                       {/* Priority */}
@@ -709,8 +709,12 @@ export default function Dashboard() {
                       )}
                     </div>
 
+                    <div className="block sm:hidden w-full h-px bg-gray-200 my-2" />
+
+
+
                     {/* Right: action buttons */}
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-3.5">
                       {editingId === task.id ? (
                         <button
                           onClick={() => updateTask(task.id)}
