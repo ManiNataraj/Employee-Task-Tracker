@@ -209,7 +209,7 @@ These challenges helped improve debugging and state management understanding dur
 Deployed on Vercel
 
 Live URL:
-https://employee-task-tracker-npdieomg7-manis-projects-b83999c0.vercel.app
+https://employee-task-tracker-lake.vercel.app/
 
 ## Backend Deployment
 Deployed on Render
