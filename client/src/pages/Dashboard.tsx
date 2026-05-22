@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import type { Task } from "../types/task";
+import Toast, { type ToastMessage } from "../components/Toast";
 
 
 const API = import.meta.env.VITE_API_URL;
@@ -74,6 +75,17 @@ export default function Dashboard() {
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editText, setEditText] = useState<string>("");
   const [editDue, setEditDue] = useState<string>("");
+  const [toasts, setToasts] = useState<ToastMessage[]>([]);
+  const toastIdRef = useRef(0);
+
+  const addToast = useCallback((message: string, type: ToastMessage["type"]) => {
+    toastIdRef.current += 1;
+    setToasts((prev) => [...prev, { id: toastIdRef.current, message, type }]);
+  }, []);
+
+  const removeToast = useCallback((id: number) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  }, []);
 
   const fetchTasks = async () => {
     const res = await axios.get(`${API}/tasks`);
@@ -86,38 +98,58 @@ export default function Dashboard() {
 
   const addTask = async () => {
     if (!taskName.trim()) return;
-    await axios.post(`${API}/tasks`, {
-      taskName,
-      priority,
-      status: "Pending",
-      dueDate: dueDate || null,
-    });
-    setTaskName("");
-    setDueDate("");
-    fetchTasks();
+    try {
+      await axios.post(`${API}/tasks`, {
+        taskName,
+        priority,
+        status: "Pending",
+        dueDate: dueDate || null,
+      });
+      setTaskName("");
+      setDueDate("");
+      await fetchTasks();
+      addToast("Task created successfully", "success");
+    } catch {
+      addToast("Failed to create task", "error");
+    }
   };
 
   const completeTask = async (id: number) => {
-    await axios.put(`${API}/tasks/${id}`, {
-      status: "Completed",
-    });
-    fetchTasks();
+    try {
+      await axios.put(`${API}/tasks/${id}`, {
+        status: "Completed",
+      });
+      await fetchTasks();
+      addToast("Task marked as completed", "success");
+    } catch {
+      addToast("Failed to complete task", "error");
+    }
   };
 
   const deleteTask = async (id: number) => {
-    await axios.delete(`${API}/tasks/${id}`);
-    fetchTasks();
+    try {
+      await axios.delete(`${API}/tasks/${id}`);
+      await fetchTasks();
+      addToast("Task deleted successfully", "success");
+    } catch {
+      addToast("Failed to delete task", "error");
+    }
   };
 
   const updateTask = async (id: number) => {
-    await axios.put(`${API}/tasks/${id}`, {
-      taskName: editText,
-      dueDate: editDue || null,
-    });
-    setEditingId(null);
-    setEditText("");
-    setEditDue("");
-    fetchTasks();
+    try {
+      await axios.put(`${API}/tasks/${id}`, {
+        taskName: editText,
+        dueDate: editDue || null,
+      });
+      setEditingId(null);
+      setEditText("");
+      setEditDue("");
+      await fetchTasks();
+      addToast("Task updated successfully", "success");
+    } catch {
+      addToast("Failed to update task", "error");
+    }
   };
 
   const startEdit = (task: Task) => {
@@ -153,6 +185,12 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* ── Toast Container ── */}
+      <div className="fixed top-4 right-4 z-50 flex flex-col gap-2.5 w-72 pointer-events-none">
+        {toasts.map((t) => (
+          <Toast key={t.id} toast={t} onRemove={removeToast} />
+        ))}
+      </div>
       <div className="max-w-2xl mx-auto px-4 py-8 sm:py-10">
         {/* ── Header ── */}
         <div className="mb-7">
