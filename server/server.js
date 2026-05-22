@@ -11,8 +11,14 @@ app.use(express.json());
 
 app.use("/tasks", taskRoutes);
 
+app.get("/", (req, res) => {
+  res.json({ status: "ok", message: "Employee Task Tracker API" });
+});
+
+const PORT = process.env.PORT || 5000;
+
 sequelize.sync().then(() => {
-  app.listen(5000, () => {
-    console.log("Server running on port 5000");
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
   });
 });
